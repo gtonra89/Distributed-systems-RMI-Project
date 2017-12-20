@@ -16,6 +16,6 @@ public class DictionaryServer {
 
 		System.out.println("Dictionary server ready!");
 
-		DSI.queryDictionary("dog");
+		DSI.queryDictionary("hello");
 	}
 }
