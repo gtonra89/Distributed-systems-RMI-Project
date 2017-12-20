@@ -15,7 +15,7 @@ public class DictionaryServer {
 		Naming.rebind("dictionaryServiceImplemtation",DSI);
 
 		System.out.println("Dictionary server ready!");
-
-		DSI.queryDictionary("hello");
+		//check if querying server ...it worked wohoo
+		//DSI.queryDictionary("food");
 	}
 }
