@@ -5,8 +5,9 @@ import java.rmi.*;
 import java.rmi.server.*;
 import java.util.*;
 
-public class DictionaryServiceImplentation extends UnicastRemoteObject implements Interface {
+public class DictionaryServiceImplentation extends UnicastRemoteObject implements DictionaryService {
 	private static final long serialVersionUID = 1L;
+	private String result ="";
 	HashMapDictionary HDMap; HashMap<String, ArrayList<String>> dictHashMap;
 	
 	public DictionaryServiceImplentation() throws Exception, RemoteException{
@@ -15,12 +16,15 @@ public class DictionaryServiceImplentation extends UnicastRemoteObject implement
 		dictHashMap = HDMap.returnDictionary();
 	}
 	@Override
-	public void queryDictionary(String input) throws RemoteException {
+	public String queryDictionary(String input) throws RemoteException {
 		if(dictHashMap.containsKey(input.toUpperCase())){			
-			System.out.println(input.toUpperCase()+" --> "+dictHashMap.get(input.toUpperCase()).toString());			
+			System.out.println(dictHashMap.get(input.toUpperCase()).toString());
+			result = dictHashMap.get(input.toUpperCase()).toString();
 		}	
 		else{
-			System.out.println(input.toUpperCase()+" --> This word is undefined in this dictionary!");
+			
+			result = "This Word is Not in dictionary!";
 		}
+		return result;
 	}
 }

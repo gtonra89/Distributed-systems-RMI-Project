@@ -1,6 +1,11 @@
 package ClientSide;
 
 import java.io.IOException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,10 +15,13 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class LookupServlet
  */
-@WebServlet("/LookupServlet")
+@WebServlet(asyncSupported = true,urlPatterns = {"/LookupServlet"})
 public class LookupServlet extends HttpServlet {
+	//Private Variables declared 
 	private static final long serialVersionUID = 1L;
-       
+    private int Id;
+    private String result = "";
+    private BlockingQueue<jobID> QueueList = new ArrayBlockingQueue<jobID>(100);
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -26,12 +34,40 @@ public class LookupServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String datapassed = request.getParameter("text1");
-		response.getWriter().append("dataSent : ").append(datapassed);
-		this.getServletContext().getRequestDispatcher("/home.jsp").forward(request, response);
+		/*
+		 * taking in data passed to string variable  
+		 * converting it to uppercase 
+		 * as per the CSV style passing it to a Job
+		 */
+		response.setContentType("text/html");
+		String datapassed = request.getParameter("text");
+		Id = Id +1;
+		jobID JID = new jobID(Id, datapassed); 
 		
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		try {
+			QueueList.put(JID);
+			System.out.println("calling queue");
+		}
+		catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		System.out.println(Id);
+		String input = request.getParameter("text");
+		try {
+			DictionaryService DS = (DictionaryService) Naming.lookup("rmi://127.0.0.1:1099/dictionaryService");
+			result = DS.queryDictionary(input);
+		} catch (NotBoundException e) {
+			e.printStackTrace();
+			System.out.println("falling in here");
+		}
+		request.setAttribute("datapassed", input);
+		request.setAttribute("result", result);
+		
+		javax.servlet.RequestDispatcher dispatch = request.getRequestDispatcher("/Result.jsp");
+		
+		dispatch.forward(request, response);
+		System.out.println("getting here");
+		
 	}
 
 	/**

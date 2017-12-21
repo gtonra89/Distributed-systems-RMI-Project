@@ -10,7 +10,7 @@
 		<H1>Dictionary Lookup</H1>
         <FORM ACTION="LookupServlet" METHOD="POST">
             Please enter your Word to Search:
-            <INPUT TYPE="TEXT" NAME="text1">
+            <INPUT TYPE="TEXT" NAME="text">
             <BR>
             <INPUT TYPE="SUBMIT" value="Search">
         </FORM>

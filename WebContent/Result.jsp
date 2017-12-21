@@ -7,12 +7,29 @@
 <title>Dictionary Lookup System</title>
 </head>
 <body>
-		<H1>Dictionary Lookup</H1>
-        <FORM ACTION="LookupServlet" METHOD="POST">
-            Please enter your Word to Search:
-            <INPUT TYPE="TEXT" NAME="text1">
-            <BR>
-            <INPUT TYPE="SUBMIT" value="Search">
-        </FORM>
+		<td>
+					<h1 align="center">Dictionary Service</h1>
+					<br/>
+					<h3>Response:</h3>
+							<%
+							String input = (String)request.getAttribute("datapassed");
+							String result = (String)request.getAttribute("result");
+							
+							if(result == null)
+							{
+								out.print("no input entered  " + 
+										"\n please enter a word  to compare by clciking make another query below");
+							}
+							else
+							{
+								out.print("Word: " + input);
+								
+								out.print("Result: " + result);
+							}
+							%>
+					<br/>
+					<br/>		
+					<p align="center"><a href="home.jsp" id="Home" >Make another Query</a></p>
+				</td>
 </body>
 </html>
