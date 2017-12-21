@@ -1,19 +1,17 @@
 package ServerSide;
 
-import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
-public class DictionaryServiceImplentation extends UnicastRemoteObject implements DictionaryService {
+public class DictionaryServiceImp extends UnicastRemoteObject implements DictionaryService {
 	private static final long serialVersionUID = 1L;
-	private String result = "";
+	//private String result = "";
 	HashMapDictionary Map;
 	HashMap<String, ArrayList<String>> HashMap;
 
-	public DictionaryServiceImplentation() throws Exception, RemoteException {
+	public DictionaryServiceImp() throws Exception, RemoteException {
 		super();
 		Map = new HashMapDictionary();
 		Map.ReadCsv();

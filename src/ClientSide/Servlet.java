@@ -15,9 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class LookupServlet
  */
-@WebServlet(asyncSupported = true, urlPatterns = { "/LookupServlet" })
+@WebServlet(asyncSupported = true, urlPatterns = { "/Servlet" })
 
-public class LookupServlet extends HttpServlet {
+public class Servlet extends HttpServlet {
 	// Private Variables declared
 	private static final long serialVersionUID = 1L;
 	private int Id;
@@ -27,7 +27,7 @@ public class LookupServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LookupServlet() {
+	public Servlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -44,8 +44,9 @@ public class LookupServlet extends HttpServlet {
 		 */
 		response.setContentType("text/html");
 		String datapassed = request.getParameter("text");
+		System.out.println(datapassed);
 		Id = Id + 1;
-		jobID JID = new jobID(Id, datapassed);
+		jobID JID = new jobID(Id, request.getParameter("text"));
 
 		try {
 			QueueList.put(JID);
@@ -53,13 +54,13 @@ public class LookupServlet extends HttpServlet {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Id);
+		//System.out.println(Id);
 		// String input = request.getParameter("text");
 		try {
 			System.out.println("getting to the try");
-			DictionaryService DS = (DictionaryService) Naming.lookup("rmi://127.0.0.1:1099/dictionaryService");
-			result = DS.queryDictionary(datapassed);
-			System.out.println(result);
+			DictionaryService ds = (DictionaryService) Naming.lookup("rmi://127.0.0.1:1099/dictionaryService");
+			result = ds.queryDictionary(datapassed);
+			//System.out.println(result);
 		} catch (NotBoundException e) {
 			System.out.println("going to the catch");
 			e.printStackTrace();
