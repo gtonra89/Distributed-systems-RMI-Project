@@ -15,65 +15,71 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class LookupServlet
  */
-@WebServlet(asyncSupported = true,urlPatterns = {"/LookupServlet"})
+@WebServlet(asyncSupported = true, urlPatterns = { "/LookupServlet" })
+
 public class LookupServlet extends HttpServlet {
-	//Private Variables declared 
+	// Private Variables declared
 	private static final long serialVersionUID = 1L;
-    private int Id;
-    private String result = "";
-    private BlockingQueue<jobID> QueueList = new ArrayBlockingQueue<jobID>(100);
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public LookupServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	private int Id;
+	private String result = "";
+	private BlockingQueue<jobID> QueueList = new ArrayBlockingQueue<jobID>(100);
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public LookupServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		/*
-		 * taking in data passed to string variable  
-		 * converting it to uppercase 
+		 * taking in data passed to string variable converting it to uppercase
 		 * as per the CSV style passing it to a Job
 		 */
 		response.setContentType("text/html");
 		String datapassed = request.getParameter("text");
-		Id = Id +1;
-		jobID JID = new jobID(Id, datapassed); 
-		
+		Id = Id + 1;
+		jobID JID = new jobID(Id, datapassed);
+
 		try {
 			QueueList.put(JID);
 			System.out.println("calling queue");
-		}
-		catch (InterruptedException e) {
+		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		System.out.println(Id);
-		String input = request.getParameter("text");
+		// String input = request.getParameter("text");
 		try {
+			System.out.println("getting to the try");
 			DictionaryService DS = (DictionaryService) Naming.lookup("rmi://127.0.0.1:1099/dictionaryService");
-			result = DS.queryDictionary(input);
+			result = DS.queryDictionary(datapassed);
+			System.out.println(result);
 		} catch (NotBoundException e) {
+			System.out.println("going to the catch");
 			e.printStackTrace();
-			System.out.println("falling in here");
 		}
-		request.setAttribute("datapassed", input);
+		request.setAttribute("datapassed", datapassed);
 		request.setAttribute("result", result);
-		
-		javax.servlet.RequestDispatcher dispatch = request.getRequestDispatcher("/Result.jsp");
-		
-		dispatch.forward(request, response);
+
+		javax.servlet.RequestDispatcher dp = request.getRequestDispatcher("/result.jsp");
+
+		dp.forward(request, response);
 		System.out.println("getting here");
-		
+
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

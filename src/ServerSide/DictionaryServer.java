@@ -12,10 +12,10 @@ public class DictionaryServer {
 		LocateRegistry.createRegistry(1099);
 
 		// bind dictionary service with a name.
-		Naming.rebind("dictionaryService",DSI);
+		Naming.rebind("dictionaryService", DSI);
 
 		System.out.println("server online!");
-		//check if querying server ...it worked wohoo
-		DSI.queryDictionary("HELLO");
+		// check if querying server ...it worked wohoo
+		DSI.queryDictionary("dog");
 	}
 }
