@@ -8,25 +8,22 @@
 </head>
 <body>
 
-	<h1 align="center">Dictionary Service</h1>
+	<h1 align="center">Dictionary Lookup System</h1>
 	<br />
-	<h3>Response:</h3>
+	<h3 align = "center">Result From Dictionary</h3>
 	<%
 		String datapassed = (String) request.getAttribute("datapassed");
 		String result = (String) request.getAttribute("result");
 
-		if (result == null) {
-
-		} else {
-			out.print("Word: " + datapassed);
-
-			out.print("Result: " + result);
-		}
+		out.print("Word: " + datapassed);
+		out.print("<br/>");
+		out.print("<br/>");
+		out.print("Result: " + result);
 	%>
 	<br />
 	<br />
 	<p align="center">
-		<a href="home.jsp" id="Home">Make another Query</a>
+		<a href="home.jsp" id="Home">Query Again</a>
 	</p>
 </body>
 </html>

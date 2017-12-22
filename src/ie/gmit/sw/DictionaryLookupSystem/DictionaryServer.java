@@ -1,4 +1,4 @@
-package ServerSide;
+package ie.gmit.sw.DictionaryLookupSystem;
 
 import java.rmi.Naming;
 import java.rmi.registry.LocateRegistry;
@@ -12,10 +12,10 @@ public class DictionaryServer {
 		LocateRegistry.createRegistry(1099);
 
 		// bind dictionary service with a name.
-		Naming.rebind("dictionaryService", ds);
+		Naming.rebind("DS", ds);
 
 		System.out.println("server online!");
-		// check if querying server ...it worked wohoo
-		//ds.queryDictionary("dog");
+		// simple check if querying server ...it worked wohoo
+		// ds.queryDictionary("dog");
 	}
 }

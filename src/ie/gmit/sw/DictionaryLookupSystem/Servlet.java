@@ -1,4 +1,4 @@
-package ClientSide;
+package ie.gmit.sw.DictionaryLookupSystem;
 
 import java.io.IOException;
 import java.rmi.Naming;
@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ie.gmit.sw.DictionaryLookupSystem.DictionaryService;
+
 /**
  * Servlet implementation class LookupServlet
  */
@@ -22,7 +24,7 @@ public class Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private int Id;
 	private String result = "";
-	private BlockingQueue<jobID> QueueList = new ArrayBlockingQueue<jobID>(100);
+	private BlockingQueue<Queue> QueueList = new ArrayBlockingQueue<Queue>(100);
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -38,40 +40,30 @@ public class Servlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		/*
-		 * taking in data passed to string variable converting it to uppercase
-		 * as per the CSV style passing it to a Job
-		 */
 		response.setContentType("text/html");
 		String datapassed = request.getParameter("text");
-		System.out.println(datapassed);
 		Id = Id + 1;
-		jobID JID = new jobID(Id, request.getParameter("text"));
+		Queue queueID = new Queue(Id, datapassed);
 
 		try {
-			QueueList.put(JID);
-			System.out.println("calling queue");
+			QueueList.put(queueID);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		//System.out.println(Id);
+		// System.out.println(Id);
 		// String input = request.getParameter("text");
 		try {
 			System.out.println("getting to the try");
-			DictionaryService ds = (DictionaryService) Naming.lookup("rmi://127.0.0.1:1099/dictionaryService");
+			DictionaryService ds = (DictionaryService) Naming.lookup("rmi://127.0.0.1:1099/DS");
 			result = ds.queryDictionary(datapassed);
-			//System.out.println(result);
 		} catch (NotBoundException e) {
 			System.out.println("going to the catch");
 			e.printStackTrace();
 		}
 		request.setAttribute("datapassed", datapassed);
 		request.setAttribute("result", result);
-
 		javax.servlet.RequestDispatcher dp = request.getRequestDispatcher("/result.jsp");
-
 		dp.forward(request, response);
-		System.out.println("getting here");
 
 	}
 

@@ -1,4 +1,4 @@
-package ServerSide;
+package ie.gmit.sw.DictionaryLookupSystem;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -7,13 +7,13 @@ import java.util.*;
 
 public class DictionaryServiceImp extends UnicastRemoteObject implements DictionaryService {
 	private static final long serialVersionUID = 1L;
-	//private String result = "";
-	HashMapDictionary Map;
+	// private String result = "";
+	HashDictionary Map;
 	HashMap<String, ArrayList<String>> HashMap;
 
 	public DictionaryServiceImp() throws Exception, RemoteException {
 		super();
-		Map = new HashMapDictionary();
+		Map = new HashDictionary();
 		Map.ReadCsv();
 		HashMap = Map.returnDictionary();
 	}

@@ -1,10 +1,10 @@
-package ClientSide;
+package ie.gmit.sw.DictionaryLookupSystem;
 
-public class jobID {
+public class Queue {
 	private int JobID = 0;
 	private String message = "";
 
-	public jobID(int id, String datapassed) {
+	public Queue(int id, String datapassed) {
 		JobID = id;
 		message = datapassed;
 	}

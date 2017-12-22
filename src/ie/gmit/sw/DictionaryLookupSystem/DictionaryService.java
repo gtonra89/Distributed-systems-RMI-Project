@@ -1,4 +1,4 @@
-package ClientSide;
+package ie.gmit.sw.DictionaryLookupSystem;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
