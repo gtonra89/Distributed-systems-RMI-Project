@@ -44,12 +44,12 @@ Eclipse Java EE I used Neon version :<br>https://www.eclipse.org/downloads/packa
 <br>Apache Tomcat 9.0 :<br>https://tomcat.apache.org/download-70.cgi
 
 ## Download Tomcat9.0
-1.Have project open in Eclipse
-2.Go to Window -> Preferences
-3.Type in server -> Runtime environment
-4.Add -> Apache Tomcat v9.0
-5.Then go back & Go to Project -> Properties
-6.Java Build Path -> Libraries -> Add Library -> Server Runtime -> Apache Tomcat v9.0 -> Finish -> Apply
+1.Have project open in Eclipse<br>
+2.Go to Window -> Preferences<br>
+3.Type in server -> Runtime environment<br>
+4.Add -> Apache Tomcat v9.0<br>
+5.Then go back & Go to Project -> Properties<br>
+6.Java Build Path -> Libraries -> Add Library -> Server Runtime -> Apache Tomcat v9.0 -> Finish -> Apply<br>
 
 ## How to Run
 1.Clone the repository to your machine.<br>
