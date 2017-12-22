@@ -59,6 +59,9 @@ public class Servlet extends HttpServlet {
 		} catch (NotBoundException e) {
 			System.out.println("going to the catch");
 			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		request.setAttribute("datapassed", datapassed);
 		request.setAttribute("result", result);

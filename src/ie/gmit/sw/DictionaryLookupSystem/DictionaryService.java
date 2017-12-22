@@ -6,6 +6,6 @@ import java.util.ArrayList;
 
 public interface DictionaryService extends Remote {
 
-	public String queryDictionary(String filename) throws RemoteException;
+	public String queryDictionary(String filename) throws RemoteException, Exception;
 
 }
