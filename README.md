@@ -41,10 +41,24 @@ down and simulate a real asynchronous service
 <img src="https://github.com/gtonra89/Distributed-systems-RMI-Project/blob/master/apache-tomcate-web-server-online-training.jpg?raw=true" align="left"/>
 <br><br><br><br><br><br>
 Eclipse Java EE I used Neon version :<br>https://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/neon3
-<br>Apache Tomcat 7.0 :<br>https://tomcat.apache.org/download-70.cgi
+<br>Apache Tomcat 9.0 :<br>https://tomcat.apache.org/download-70.cgi
+
+## Download Tomcat9.0
+1.Have project open in Eclipse
+2.Go to Window -> Preferences
+3.Type in server -> Runtime environment
+4.Add -> Apache Tomcat v9.0
+5.Then go back & Go to Project -> Properties
+6.Java Build Path -> Libraries -> Add Library -> Server Runtime -> Apache Tomcat v9.0 -> Finish -> Apply
 
 ## How to Run
-
+1.Clone the repository to your machine.<br>
+2.Extract the Zip
+3.Import the unzipped folder from eclipse.<br>
+4.Go to the src folder and run "DictionaryServer.java" file as a Java Application.<br>
+5.Then go to the Dynamic Web Application and run "home.jsp" file on the server.<br>
+6.Go to the web brower on your machine or on Eclipse and the webpage will be there 
+Search for a word<br>
 
 
 
